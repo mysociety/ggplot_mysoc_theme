@@ -1,4 +1,4 @@
-#mySociety ggplot theme
+# mySociety ggplot theme
 
 Theme to standardise ggplots charge using mySociety/SocietyWorks brand elements and logos.
 
