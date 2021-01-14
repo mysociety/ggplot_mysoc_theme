@@ -47,27 +47,14 @@ sworks_green <- "#0BD198"
 sworks_pink <- "#e65376"
 
 
-# these need replacing
-sworks_2_point <- c(
-  sworks_blue,
-  sworks_pink
-)
-
-sworks_3_point <- c(
-  sworks_blue,
-  sworks_green,
-  sworks_pink
-)
-sworks_4_point <- c(
-  sworks_blue,
-  sworks_green,
-  sworks_pink,
-  sworks_orange
-)
-
 # mysoc dark blue + d2 category 10 colours
 mysoc_palette <- c(
   mysoc_blue_dark, "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+  "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+)
+
+sworks_palette <- c(
+  sworks_blue, sworks_orange, sworks_green, sworks_pink, "#9467bd",
   "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
 )
 
@@ -79,26 +66,24 @@ mysoc_colour <- function() {
 
 sworks_colour <- function() {
   function(n) {
-    if (n == 2) {
-      return(sworks_2_point)
-    }
-    if (n == 3) {
-      return(sworks_3_point)
-    }
-    if (n == 4) {
-      return(sworks_4_point)
-    }
+    return(sworks_palette[1:n])
   }
 }
+
 
 # scale to use to get correct colours on a discreet range (coloured lines, bars, etc)
 mysoc_discreet_scale <- function() {
   ggplot2::discrete_scale("colour", "branded", mysoc_colour())
 }
 
+mysoc_discreet_fill <- function() {
+  scale_fill_manual(values=mysoc_palette)
+}
+
 sworks_discreet_scale <- function() {
   ggplot2::discrete_scale("colour", "branded", sworks_colour())
 }
+
 
 # add elements related to brand logo to theme so can be overridden
 # by stacking themes
@@ -160,14 +145,8 @@ mysoc_theme <- function(legend.position = "bottom",
       brand.offset = "+40+0",
       brand.gravity = "southwest"
     ) +
+    theme(legend.position=legend.position) + 
     theme(line = element_line(size = 2)) +
-    theme(
-      legend.position = legend.position,
-      legend.margin = margin(c(0, 0, 0, 0)),
-      legend.box.margin = margin(-10, 95, -5, -5),
-      legend.text.align = 0,
-      legend.justification = c(1, 0)
-    ) +
     theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"))
 }
 
@@ -177,9 +156,9 @@ sworks_theme <- function(legend.position = "bottom",
                          header_colour = mysoc_black,
                          font_family_title = "lato_bold",
                          font_family = "lato",
-                         header_size = default_header_size) {
+                         header_size = heading_pt * ratio) {
   new_theme <- mysoc_theme(legend.position, header_colour, font_family_title, font_family, header_size)
-  new_theme <- new_theme + theme(brand.logo = "sworks.png", brand.offset = "+80+10")
+  new_theme <- new_theme + theme(brand.logo = "societyworks.png", brand.offset = "+80+10")
 }
 
 # change the default sizes of points and labels to match scaling elsewhere
