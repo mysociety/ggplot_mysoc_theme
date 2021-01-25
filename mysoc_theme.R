@@ -29,6 +29,8 @@ font_add(family = "sspro", regular = file.path(theme_dir, "font", "SourceSansPro
 font_add(family = "sspro_bold", regular = file.path(theme_dir, "font", "SourceSansPro-Bold.ttf"))
 font_add(family = "lato", regular = file.path(theme_dir, "font", "Lato-Regular.ttf"))
 font_add(family = "lato_bold", regular = file.path(theme_dir, "font", "Lato-Black.ttf"))
+font_add(family = "roboto", regular = file.path(theme_dir, "font", "Roboto-Regular.ttf"))
+font_add(family = "roboto_bold", regular = file.path(theme_dir, "font", "Roboto-Bold.ttf"))
 
 # core theme colours
 
@@ -151,6 +153,8 @@ mysoc_theme <- function(legend.position = "bottom",
 }
 
 
+
+
 # theme variant for societyworks
 sworks_theme <- function(legend.position = "bottom",
                          header_colour = mysoc_black,
@@ -159,6 +163,15 @@ sworks_theme <- function(legend.position = "bottom",
                          header_size = heading_pt * ratio) {
   new_theme <- mysoc_theme(legend.position, header_colour, font_family_title, font_family, header_size)
   new_theme <- new_theme + theme(brand.logo = "societyworks.png", brand.offset = "+80+10")
+}
+
+# theme variant for publicsquare
+publicsquare_theme <- function(legend.position = "bottom",
+                         header_colour = mysoc_black,
+                         font_family_title = "roboto_bold",
+                         font_family = "roboto",
+                         header_size = heading_pt * ratio) {
+  new_theme <- mysoc_theme(legend.position, header_colour, font_family_title, font_family, header_size)
 }
 
 # change the default sizes of points and labels to match scaling elsewhere
