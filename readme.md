@@ -22,3 +22,9 @@ Use `save_and_show(plot, filename)` to render properly with logo. There is a `no
 ## To do
 
 * Format as a proper R package so it can be imported directly. 
+
+## Licence
+
+Code is under an MIT Licence. 
+
+[Logos](https://www.mysociety.org/press/) are copyright mySociety/SocietyWorks.
