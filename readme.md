@@ -6,19 +6,26 @@ Matches the altair theme in the `research_common` repository. Major updates shou
 
 ## To use
 
-For moment, source the theme file:
+Can be installed with:
 
-```source("ggplot_mysoc_theme//mysoc_theme.R")```
+```
+library(devtools)
+install_github("mysociety/ggplot_mysoc_theme")
+```
 
-and then add: 
+and then loaded with:
+
+```
+library(ggplotmysoc)
+```
+
+To use with a ggplot, add: 
 
 ```+ mysoc_theme() + mysoc_discreet_scale()```
+
 to the ggplot2 description theme and colours. 
 
 `sworks_discreet_scale()` and `sworks_theme()` also avaliable.
 
 Use `save_and_show(plot, filename)` to render properly with logo. There is a `no_logo` arguiment to remove this. 
 
-## To do
-
-* Format as a proper R package so it can be imported directly. 
