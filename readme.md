@@ -29,3 +29,8 @@ to the ggplot2 description theme and colours.
 
 Use `save_and_show(plot, filename)` to render properly with logo. There is a `no_logo` arguiment to remove this. 
 
+## Licence
+
+Code is under an MIT Licence. 
+
+[Logos](https://www.mysociety.org/press/) are copyright mySociety/SocietyWorks.
