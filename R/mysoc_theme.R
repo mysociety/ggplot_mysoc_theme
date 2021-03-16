@@ -66,45 +66,103 @@ sworks_orange <- "#fed876"
 sworks_green <- "#0BD198"
 sworks_pink <- "#e65376"
 
-# mysoc dark blue + d2 category 10 colours
-#' @export
+mysoc_palette_yellow <- "#ffe269"
+mysoc_palette_orange <- "#f4a140"
+mysoc_palette_berry <- "#e02653"
+mysoc_palette_purple <- "#a94ca6"
+mysoc_palette_blue <- "#4faded"
+mysoc_palette_dark_blue <- "#0a4166"
+
+mysoc_mono_blue_l20 <- "#acd8f6"
+mysoc_mono_blue <- "#4faded"
+mysoc_mono_blue_d20 <- "#147cc2"
+mysoc_mono_blue_d30 <- "#0f5e94"
+mysoc_mono_blue_d40 <- "#0a4166"
+mysoc_mono_blue_d50 <- "#062337"
+
+sworks_palette_yellow <- "#fed876"
+sworks_palette_berry <- "#e02653"
+sworks_palette_blue <- "#0ba7d1"
+sworks_palette_dark_blue <- "#065a70"
+
+sworks_mono_blue_l30 <- "#7ddef8"
+sworks_mono_blue <- "#oba7d1"
+sworks_mono_blue_d15 <- "#076d88"
+sworks_mono_blue_d30 <- "#033340"
+
+# mysoc colours + d2 category 10 colours
 mysoc_palette <- c(
-  mysoc_blue_dark, "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
-  "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+  mysoc_blue_dark, mysoc_palette_blue, mysoc_palette_purple, mysoc_palette_berry, mysoc_palette_orange,
+  mysoc_palette_yellow, "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
 )
-#' @export
+
+mysoc_contrast_palette <- c(
+  mysoc_blue_dark, mysoc_palette_orange, mysoc_palette_purple, mysoc_palette_berry, mysoc_palette_blue, mysoc_palette_purple, 
+  mysoc_palette_yellow, "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+)
+
+
 sworks_palette <- c(
-  sworks_blue, sworks_orange, sworks_green, sworks_pink, "#9467bd",
+  sworks_palette_yellow, sworks_palette_berry, sworks_palette_blue, sworks_palette_dark_blue, "#9467bd",
   "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
 )
-#' @export
+
+mysoc_mono_palette <- c(mysoc_mono_blue_d50,mysoc_mono_blue_d40, mysoc_mono_blue_d30, mysoc_mono_blue_d20, mysoc_mono_blue, mysoc_mono_blue_l20 )
+
+sworks_mono_palette <- c(sworks_mono_blue_d30, sworks_mono_blue_d15, sworks_mono_blue, sworks_mono_blue_l30 )
+
+list_to_func <- function(colour_list){
+  function(n) {
+    return(list[1:n])
+  }
+}
+
 mysoc_colour <- function() {
   function(n) {
     return(mysoc_palette[1:n])
   }
 }
-#' @export
+
 sworks_colour <- function() {
   function(n) {
     return(sworks_palette[1:n])
   }
 }
 
-
 # scale to use to get correct colours on a discreet range (coloured lines, bars, etc)
-#' @export
-mysoc_discreet_scale <- function() {
-  ggplot2::discrete_scale("colour", "branded", mysoc_colour())
+mysoc_discreet_scale <- function(mono = TRUE, contrast=FALSE) {
+  if (mono == TRUE){
+    if (contrast == TRUE){
+      palette = mysoc_contrast_palette
+    } else {
+      palette = mysoc_palette
+    }
+  } else {
+    palette = mysoc_mono_palette
+  }
+  ggplot2::discrete_scale("colour", "branded", list_to_func(palette))
 }
 
-#' @export
-mysoc_discreet_fill <- function() {
-  scale_fill_manual(values = mysoc_palette)
+sworks_discreet_scale <- function(mono = TRUE) {
+  if (mono == TRUE){
+    palette = sworks_palette
+  } else {
+    palette = sworks_mono_palette
+  }
+  ggplot2::discrete_scale("colour", "branded", list_to_func(palette))
 }
 
-#' @export
-sworks_discreet_scale <- function() {
-  ggplot2::discrete_scale("colour", "branded", sworks_colour())
+mysoc_discreet_fill <- function(mono = TRUE, contrast=FALSE) {
+  if (mono == TRUE){
+    if (contrast == TRUE){
+      palette = mysoc_contrast_palette
+    } else {
+      palette = mysoc_palette
+    }
+  } else {
+    palette = mysoc_mono_palette
+  }
+  scale_fill_manual(values=palette)
 }
 
 
